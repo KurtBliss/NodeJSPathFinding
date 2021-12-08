@@ -1,0 +1,1 @@
+http_get(http_base + "logout/" + string(user_id));

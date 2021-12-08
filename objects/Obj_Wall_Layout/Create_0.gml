@@ -1,0 +1,1 @@
+window_set_caption("press space to get wall layout");

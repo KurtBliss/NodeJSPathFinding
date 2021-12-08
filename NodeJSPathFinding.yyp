@@ -1,0 +1,51 @@
+{
+  "resources": [
+    {"id":{"name":"Rm_Test","path":"rooms/Rm_Test/Rm_Test.yy",},"order":12,},
+    {"id":{"name":"Spr_Other_Character","path":"sprites/Spr_Other_Character/Spr_Other_Character.yy",},"order":5,},
+    {"id":{"name":"Par_User","path":"objects/Par_User/Par_User.yy",},"order":7,},
+    {"id":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},"order":2,},
+    {"id":{"name":"Update","path":"scripts/Update/Update.yy",},"order":6,},
+    {"id":{"name":"Obj_Controller","path":"objects/Obj_Controller/Obj_Controller.yy",},"order":1,},
+    {"id":{"name":"Spawn_Wall_Layout","path":"scripts/Spawn_Wall_Layout/Spawn_Wall_Layout.yy",},"order":14,},
+    {"id":{"name":"Note1","path":"notes/Note1/Note1.yy",},"order":8,},
+    {"id":{"name":"Obj_Wall_Layout","path":"objects/Obj_Wall_Layout/Obj_Wall_Layout.yy",},"order":13,},
+    {"id":{"name":"Obj_Other_Player","path":"objects/Obj_Other_Player/Obj_Other_Player.yy",},"order":4,},
+    {"id":{"name":"Spr_Character","path":"sprites/Spr_Character/Spr_Character.yy",},"order":3,},
+    {"id":{"name":"Obj_Wall","path":"objects/Obj_Wall/Obj_Wall.yy",},"order":9,},
+    {"id":{"name":"Spr_Wall","path":"sprites/Spr_Wall/Spr_Wall.yy",},"order":10,},
+    {"id":{"name":"Rm_Wall_Layout","path":"rooms/Rm_Wall_Layout/Rm_Wall_Layout.yy",},"order":0,},
+  ],
+  "Options": [
+    {"name":"Linux","path":"options/linux/options_linux.yy",},
+    {"name":"macOS","path":"options/mac/options_mac.yy",},
+    {"name":"Main","path":"options/main/options_main.yy",},
+    {"name":"Windows","path":"options/windows/options_windows.yy",},
+    {"name":"operagx","path":"options/operagx/options_operagx.yy",},
+  ],
+  "isDnDProject": false,
+  "isEcma": false,
+  "tutorialPath": "",
+  "configs": {
+    "name": "Default",
+    "children": [],
+  },
+  "RoomOrderNodes": [
+    {"roomId":{"name":"Rm_Test","path":"rooms/Rm_Test/Rm_Test.yy",},},
+    {"roomId":{"name":"Rm_Wall_Layout","path":"rooms/Rm_Wall_Layout/Rm_Wall_Layout.yy",},},
+  ],
+  "Folders": [],
+  "AudioGroups": [
+    {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
+  ],
+  "TextureGroups": [
+    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,"resourceVersion":"1.3","name":"Default","resourceType":"GMTextureGroup",},
+  ],
+  "IncludedFiles": [],
+  "MetaData": {
+    "IDEVersion": "2.3.7.603",
+  },
+  "resourceVersion": "1.4",
+  "name": "NodeJSPathFinding",
+  "tags": [],
+  "resourceType": "GMProject",
+}
