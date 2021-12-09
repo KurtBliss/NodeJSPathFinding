@@ -105,7 +105,7 @@ function intervalBot() {
               [to.cell_x, to.cell_y], // end
               {
                 // option
-                rightAngle: false, // default:false,Allow diagonal
+                rightAngle: true, // default:false,Allow diagonal
                 optimalResult: true, // default:true,In a few cases, the speed is slightly slower
               }
             );
