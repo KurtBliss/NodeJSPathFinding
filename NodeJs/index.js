@@ -82,7 +82,20 @@ function intervalBot() {
       var target_point = new Point(target.user_x, target.user_y);
 
       if (target.user_active) {
-        if (bot.path == null) {
+        if (bot.path == null || (bot.path != null && bot.path[0] == null)) {
+          grid = new Grid({
+            col: Math.floor(WIDTH / CELL_W), // col
+            row: Math.floor(HEIGHT / CELL_H), // row
+            render: function () {
+              // Optional, this method is triggered when the grid point changes
+              // console.log(this);
+            },
+          });
+          // Add obstacles to the grid
+          obstacles.forEach((item) => {
+            grid.set(item, "value", 1); // Values greater than 0 are obstacles
+          });
+
           var from = get_pos_cell(self_point.x, self_point.y);
           var to = get_pos_cell(target_point.x, target_point.y);
 
@@ -109,7 +122,7 @@ function intervalBot() {
             bot.path.shift();
             try {
               pos = get_cell_pos(bot.path[0][0], bot.path[0][1]);
-              path_point = new Point(pos.point_x, pos.point_y);
+              path_point = new Point(pos.point_x + 16, pos.point_y + 16);
             } catch (error) {
               break;
             }
@@ -120,7 +133,6 @@ function intervalBot() {
           clients[bot.user_id].user_x = move_to.x; //self_point.x;
           clients[bot.user_id].user_y = move_to.y; //self_point.y;
         } else {
-          console.log("else");
           // var move_to = self_point.moveTo(target_point, 0.4);
           // clients[bot.user_id].user_x = move_to.x; //self_point.x;
           // clients[bot.user_id].user_y = move_to.y; //self_point.y;
@@ -175,10 +187,6 @@ function get_pos_cell(point_x, point_y) {
     cell_y: Math.floor((point_y / HEIGHT) * (HEIGHT / CELL_H)),
   };
 }
-
-function build_path_to_client(bot_id, client_id) {}
-
-function process_bot_path() {}
 
 function new_client(_bot = false) {
   return {
