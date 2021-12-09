@@ -122,7 +122,7 @@ function intervalBot() {
             bot.path.shift();
             try {
               pos = get_cell_pos(bot.path[0][0], bot.path[0][1]);
-              path_point = new Point(pos.point_x + 16, pos.point_y + 16);
+              path_point = new Point(pos.point_x + 0, pos.point_y + 0);
             } catch (error) {
               break;
             }
