@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "net": "^1.0.2",
-    "pathfinding": "^0.4.18"
+    "fast-astar": "^1.0.6",
+    "net": "^1.0.2"
   }
 }

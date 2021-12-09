@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
-var { grid: grid_points } = require("./grid");
-var PF = require("pathfinding");
+var { grid_points: grid_points, grid: obstacles } = require("./grid");
+var { Grid, Astar } = require("fast-astar");
 
 const MSG_LOGIN = 0;
 const MSG_MOVE = 1;
@@ -17,7 +17,19 @@ const WIDTH = 640;
 const HEIGHT = 480;
 const CELL_W = 32;
 const CELL_H = 32;
-var grid = new PF.Grid(grid_points);
+
+let grid = new Grid({
+  col: Math.floor(WIDTH / CELL_W), // col
+  row: Math.floor(HEIGHT / CELL_H), // row
+  render: function () {
+    // Optional, this method is triggered when the grid point changes
+    // console.log(this);
+  },
+});
+// Add obstacles to the grid
+obstacles.forEach((item) => {
+  grid.set(item, "value", 1); // Values greater than 0 are obstacles
+});
 
 // https://github.com/qiao/PathFinding.js/pull/151 weights
 
@@ -71,39 +83,48 @@ function intervalBot() {
 
       if (target.user_active) {
         if (bot.path == null) {
-          var new_grid = grid.clone();
-          var finder = new PF.AStarFinder();
-          // Get cell location
-
           var from = get_pos_cell(self_point.x, self_point.y);
           var to = get_pos_cell(target_point.x, target_point.y);
 
-          //  bot.path =
-          console.log(
-            "finder.findPath",
-            from.cell_x,
-            from.cell_y,
-            to.cell_x,
-            to.cell_y,
-            new PF.Grid(grid_points)
-          );
-          console.log(
-            finder.findPath(
-              from.cell_x,
-              from.cell_y,
-              to.cell_x,
-              to.cell_y,
-              new PF.Grid(grid_points)
-            )
-          );
+          var astar = new Astar(grid),
+            path = astar.search(
+              [from.cell_x, from.cell_y], // start
+              [to.cell_x, to.cell_y], // end
+              {
+                // option
+                rightAngle: false, // default:false,Allow diagonal
+                optimalResult: true, // default:true,In a few cases, the speed is slightly slower
+              }
+            );
 
-          //  console.log(bot.path);
+          bot.path = path;
+          // console.log(bot.path);
         }
 
-        var move_to = self_point.moveTo(target_point, 0.4);
+        if (bot.path != null && bot.path[0] != null && bot.path[0][0] != null) {
+          var pos = get_cell_pos(bot.path[0][0], bot.path[0][1]);
+          var path_point = new Point(pos.point_x, pos.point_y);
 
-        clients[bot.user_id].user_x = move_to.x; //self_point.x;
-        clients[bot.user_id].user_y = move_to.y; //self_point.y;
+          while (path_point.distanceTo(self_point) < 16) {
+            bot.path.shift();
+            try {
+              pos = get_cell_pos(bot.path[0][0], bot.path[0][1]);
+              path_point = new Point(pos.point_x, pos.point_y);
+            } catch (error) {
+              break;
+            }
+          }
+
+          var move_to = self_point.moveTo(path_point, 0.4);
+
+          clients[bot.user_id].user_x = move_to.x; //self_point.x;
+          clients[bot.user_id].user_y = move_to.y; //self_point.y;
+        } else {
+          console.log("else");
+          // var move_to = self_point.moveTo(target_point, 0.4);
+          // clients[bot.user_id].user_x = move_to.x; //self_point.x;
+          // clients[bot.user_id].user_y = move_to.y; //self_point.y;
+        }
       }
     }
   });
